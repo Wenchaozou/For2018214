@@ -10,11 +10,11 @@ body{padding: 0px;margin: 0px}
 
 .present{
   position: fixed;
-    color: white;
+    color: white!important;
     margin:auto;
-    width: 320px;
-    left: calc(20% - 320px);
+    width: 300px;
+    left: calc(30% - 300px);
     right:0;
-    margin-top: 100px;
+    bottom: 30%;
     font-size: 32px;
 }
