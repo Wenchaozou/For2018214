@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>www.bootstrapmb.com - Animated Birthday Cake</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" type="text/css" href="ModalWindowEffects/css/default.css" />
+  <link rel="stylesheet" type="text/css" href="ModalWindowEffects/css/component.css" />
+  <script src="ModalWindowEffects/js/modernizr.custom.js"></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="wrapper">
+  <div class="greeting">Happy Birthday</div>
+  <div class="plate md-trigger"  data-modal="modal-13">
+    <div class="cake-wrap">
+      <div class="cake-topping">
+        <div class="topping-top">
+          <div class="candle-container">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="candle-wrap">
+              <div class="flame-wrap"></div>
+              <div class="candle-base">
+                <div class="candle-top"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="topping-front">
+          <div class="top-layer"></div>
+          <div class="bottom-layer"></div>
+        </div>
+      </div>
+      <div class="cake-base">
+        <div class="base-front"></div>
+        <div class="base-top"></div>
+      </div>
+      
+    </div>
+    </div>
+</div>
+  
+<svg class="svg">
+  <clipPath id="my-clip-path" clipPathUnits="objectBoundingBox"><path d="M0,0 V0.481 s0.021,0.37,0.078,0.404 s0.035,-0.296,0.102,-0.27 s0.007,0.363,0.096,0.354 s0.028,-0.466,0.1,-0.487 S0.406,0.999,0.457,0.999 s0.03,-0.502,0.075,-0.518 s0.041,0.488,0.081,0.274 c0.007,-0.038,0.021,-0.187,0.044,-0.215 c0.014,-0.017,0.038,0.401,0.075,0.392 s0.023,-0.28,0.074,-0.392 c0.022,-0.04,0.072,0.359,0.1,0.344 c0.057,-0.029,0.094,-0.405,0.094,-0.405 V-0.001"></path></clipPath>
+  <clipPath id="my-flame-path" clipPathUnits="objectBoundingBox"><path d="M0.501,0 s0.188,0.101,0.295,0.238 s0.123,0.15,0.169,0.286 S1,0.74,0.928,0.838 S0.711,1,0.501,1 S0.216,0.937,0.09,0.838 s-0.083,-0.149,0,-0.29 s0.23,-0.139,0.333,-0.276 S0.501,0,0.501,0"></path></clipPath>
+  <clipPath id="my-star-path" clipPathUnits="objectBoundingBox"><path d="M0.5,0.846 l-0.309,0.154,0.044,-0.357 L0,0.382 l0.336,-0.067 L0.5,0 l0.164,0.315,0.336,0.067,-0.235,0.261,0.044,0.357"></path></clipPath>
+</svg>
+
+<div class="md-modal md-effect-13" id="modal-13">
+  <div class="md-content">
+    <h3>一份礼物(你的今天)</h3>
+    <div>
+      <div id='errorMsg' style="display:none">密码错误!</div>
+      <div class="ipt-box-nick">
+        <input type="tel" maxlength="6" class="ipt-real-nick"/>
+        <div class="ipts-box-nick">
+          <div class="ipt-fake-box">
+            <input type="text" >
+            <input type="text" >
+            <input type="text" >
+            <input type="text" >
+            <input type="text" >
+            <input type="text" >
+          </div>
+        </div>
+        <div class="ipt-active-nick"><img src="https://t.alipayobjects.com/images/rmsweb/T1nYJhXalXXXXXXXXX.gif"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="md-overlay"></div><!-- the overlay element -->
+
+<!-- classie.js by @desandro: https://github.com/desandro/classie -->
+<script src="ModalWindowEffects/js/classie.js"></script>
+<script src="ModalWindowEffects/js/modalEffects.js"></script>
+
+<!-- for the blur effect -->
+<!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+<script>
+  // this is important for IEs
+  var polyfilter_scriptpath = '/ModalWindowEffects/js/';
+</script>
+<script src="ModalWindowEffects/js/cssParser.js"></script>
+<script src="ModalWindowEffects/js/css-filters-polyfill.js"></script>
+<!-- partial -->
+  <script src='./fireworks/js/jquery.min.js'></script>
+<script src='./gsap.min.js'></script><script  src="./script.js"></script>
+<script>
+  $(".ipt-real-nick").on("input", function() {
+        //console.log($(this).val());
+        $("#errorMsg").hide()
+        var $input = $(".ipt-fake-box input");
+        if(!$(this).val()){//无值光标顶置
+          $('.ipt-active-nick').css('left',$input.eq(0).offset().left-parseInt($('.ipt-box-nick').parent().css('padding-left'))+'px');
+        }
+        if(/^[0-9]*$/g.test($(this).val())){//有值只能是数字
+          //console.log($(this).val());
+          var pwd = $(this).val().trim();
+          for (var i = 0, len = pwd.length; i < len; i++) {
+            $input.eq(i).val(pwd[i]);
+            if($input.eq(i).next().length){//模拟光标，先将图片容器定位，控制left值而已
+              $('.ipt-active-nick').css('left',$input.eq(i+1).offset().left-parseInt($('.ipt-box-nick').parent().css('padding-left'))+'px');
+            }
+          }
+          $input.each(function() {//将有值的当前input后的所有input清空
+            var index = $(this).index();
+            if (index >= len) {
+              $(this).val("");
+            }
+          });
+          if (len == 6) {
+            //执行其他操作
+            if( pwd == "771011"){
+              $("#errorMsg").hide()
+
+              location.href='./fireworks/index.html'
+            }  else{
+                $("#errorMsg").show()
+          }
+          }
+        
+        }else{//清除val中的非数字，返回纯number的value
+          var arr=$(this).val().match(/\d/g);
+          $(this).val($(this).val().slice(0,$(this).val().lastIndexOf(arr[arr.length-1])+1));
+          //console.log($(this).val());
+        }
+      });
+</script>
+</body>
+</html>
